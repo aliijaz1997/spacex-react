@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLaunchedMissionQuery } from './../../generated/graphql';
 import Missions from './../MissionDetail/index';
+import LinearProgressWithLabel from './progressforloading';
 import clsx from 'clsx';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -80,8 +81,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-const LaunchedMissionsss = () => {
 
+const LaunchedMissionsss = () => {
+  const [id, setId] = React.useState(42);
+  console.log(id)
+  const handleIdChange = React.useCallback((newId:any) => {
+    setId(newId);
+  }, []);
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -96,7 +102,7 @@ const LaunchedMissionsss = () => {
 
     const { data, loading, error } = useLaunchedMissionQuery();
     if (loading)
-        return <h1>loading...</h1>
+        return <LinearProgressWithLabel/>
 
     if (error)
         return <h1>Error</h1>
@@ -144,7 +150,7 @@ const LaunchedMissionsss = () => {
           <List>
             {data?.launches?.map((launch , i) => (
               <ListItem button key = {i}>
-                <ListItemText primary= {launch?.mission_name} />
+                <ListItemText onClick={() => handleIdChange(i +1)} primary= {launch?.mission_name} />
               </ListItem>
             ))}
           </List>
@@ -158,7 +164,7 @@ const LaunchedMissionsss = () => {
           <div className={classes.drawerHeader} />
           <Typography paragraph>
           <h1>Missions Detail</h1>
-          <h2><Missions/></h2>
+          <h2><Missions id={id}/></h2>
           </Typography>
         </main>
       </div>
