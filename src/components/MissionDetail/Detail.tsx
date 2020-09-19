@@ -1,6 +1,6 @@
 import React from 'react';
 import { MissionQuery } from './../../generated/graphql';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import './detail.css';
 interface Props {
     data: MissionQuery
@@ -14,10 +14,7 @@ const DetailOfMission: React.FC<Props> = ({ data }) => {
             <span>Launched in {data?.launch?.launch_year} from {data?.launch?.launch_site?.site_name}</span>
             <br />
             <span className="detail">{data?.launch?.details}</span>
-            <Link to='https://react.semantic-ui.com/'>
-      <button type="button" className="btn btn-info">Button</button>
-        </div>
-
+      </div>
     )
 }
 export default DetailOfMission;
