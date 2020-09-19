@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
     },
     appBar: {
+      backgroundColor: 'Gainsboro',
+      color: 'Gray',
       transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -54,6 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerPaper: {
       width: drawerWidth,
+      backgroundColor : 'snow',
     },
     drawerHeader: {
       display: 'flex',
@@ -62,6 +65,8 @@ const useStyles = makeStyles((theme: Theme) =>
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end',
+      backgroundColor : 'whitesmoke',
+      color: 'LightGray'
     },
     content: {
       flexGrow: 1,
@@ -150,7 +155,7 @@ const LaunchedMissionsss = () => {
           <List>
             {data?.launches?.map((launch , i) => (
               <ListItem button key = {i}>
-                <ListItemText onClick={() => handleIdChange(i +1)} primary= {launch?.mission_name} />
+                <ListItemText onClick={() => handleIdChange(i+1)} primary= {launch?.mission_name} />
               </ListItem>
             ))}
           </List>
@@ -163,7 +168,6 @@ const LaunchedMissionsss = () => {
         >
           <div className={classes.drawerHeader} />
           <Typography paragraph>
-          <h1>Missions Detail</h1>
           <h2><Missions id={id}/></h2>
           </Typography>
         </main>

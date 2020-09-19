@@ -1,6 +1,7 @@
 import React  from 'react';
-import {useMissionQuery} from './../../generated/graphql'
+import {useMissionQuery} from './../../generated/graphql';
 import DetailOfMission from './Detail';
+import LinearProgressWithLabel from './../LaunchedMissions/progressforloading';
 // let data : MissionQuery;
 interface OwnProps {
   id: number;
@@ -14,7 +15,7 @@ const Missions = ({ id }: OwnProps) => {
       variables: { id: String(id) },
          });
          if (loading)
-          return <h1>Loading...</h1>
+          return <h1><LinearProgressWithLabel/></h1>
          if (error || !data)
           return <h1>Error</h1> 
           
