@@ -16,11 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import MailIcon from '@material-ui/icons/Mail';
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerPaper: {
       width: drawerWidth,
-      backgroundColor : 'snow',
+      backgroundColor: 'snow',
     },
     drawerHeader: {
       display: 'flex',
@@ -65,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end',
-      backgroundColor : 'whitesmoke',
+      backgroundColor: 'whitesmoke',
       color: 'LightGray'
     },
     content: {
@@ -90,89 +86,89 @@ const useStyles = makeStyles((theme: Theme) =>
 const LaunchedMissionsss = () => {
   const [id, setId] = React.useState(42);
   console.log(id)
-  const handleIdChange = React.useCallback((newId:any) => {
+  const handleIdChange = React.useCallback((newId: any) => {
     setId(newId);
   }, []);
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-  
-    const handleDrawerOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
-    const { data, loading, error } = useLaunchedMissionQuery();
-    if (loading)
-        return <LinearProgressWithLabel/>
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-    if (error)
-        return <h1>Error</h1>
-    // console.log(index)
-    return (
-        <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
-             SpaceX
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const { data, loading, error } = useLaunchedMissionQuery();
+  if (loading)
+    return <LinearProgressWithLabel />
+
+  if (error)
+    return <h1>Error</h1>
+  // console.log(index)
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            SpaceX
             </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <h1>Missions</h1>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            {data?.launches?.map((launch , i) => (
-              <ListItem button key = {i}>
-                <ListItemText onClick={() => handleIdChange(i+1)} primary= {launch?.mission_name} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-        </Drawer>
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        >
-          <div className={classes.drawerHeader} />
-          <Typography paragraph>
-          <h2><Missions id={id}/></h2>
-          </Typography>
-        </main>
-      </div>
-    )
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <h1>Missions</h1>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          {data?.launches?.map((launch, i) => (
+            <ListItem button key={i}>
+              <ListItemText onClick={() => handleIdChange(i + 1)} primary={launch?.mission_name} />
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+      </Drawer>
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.drawerHeader} />
+        <Typography paragraph>
+          <h2><Missions id={id} /></h2>
+        </Typography>
+      </main>
+    </div>
+  )
 }
 //onClick = {() => updateindex(i)}
 export default LaunchedMissionsss;

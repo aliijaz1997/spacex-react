@@ -8,13 +8,12 @@ interface Props {
 const DetailOfMission: React.FC<Props> = ({ data }) => {
     return (
         <div className="detailsdiv">
-
             <h1 className="Heading">Missions Detail</h1>
             <h2>{data?.launch?.mission_name}</h2>
             <span>Launched in {data?.launch?.launch_year} from {data?.launch?.launch_site?.site_name}</span>
             <br />
-            <span className="detail">{data?.launch?.details}</span>
-      </div>
+            <p className="detail">{data?.launch?.details}</p>
+        </div>
     )
 }
 export default DetailOfMission;
