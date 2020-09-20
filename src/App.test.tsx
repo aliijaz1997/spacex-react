@@ -1,9 +1,17 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow, ShallowWrapper } from 'enzyme';
 import App from './App';
+import LaunchedMissionsss from './components/LaunchedMissions/index';
+describe('Component',()=>{
+  let container: ShallowWrapper<any, Readonly<{}>, React.Component<{}, {}, any>>
+  
+  beforeEach(()=>(container = shallow(<App />)))
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+  it('shoudl render a <div />', ()=>{
+      expect(container.find('div').length).toBeGreaterThanOrEqual(1)
+
+  })
+  it('should render the Launched Component',()=>{
+    expect(container.containsMatchingElement(<LaunchedMissionsss />)).toEqual(true)
+  })
+})
